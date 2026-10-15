@@ -1,0 +1,25 @@
+name: DevOps 1-Day Bootcamp CI Pipeline
+
+# Trigger this pipeline automatically whenever code is pushed to the main branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Tell the cloud runner to download your repository files
+    - name: Checkout Repository Code
+      uses: actions/checkout@v4
+
+    # Step 2: Set up a clean Python engine in the cloud
+    - name: Initialize Python Environment
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    # Step 3: Run the code verification check (Continuous Integration)
+    - name: Execute Code Verification Test
+      run: python app.py
